@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./burgerIngredient.css";
+import classes from "./BurgerIngredient.module.css";
 
 const burgerIngredient = props => {
   let ingredient = null;
@@ -11,11 +11,12 @@ const burgerIngredient = props => {
       break;
     case "bread-top":
       ingredient = (
-        <div clasname={classes.BreadTop}>
+        <div className={classes.BreadTop}>
           <div className={classes.Seeds1} />
-          <div className={classes.Seeds1} />
+          <div className={classes.Seeds2} />
         </div>
       );
+      break;
     case "meat":
       ingredient = <div className={classes.Meat} />;
       break;
