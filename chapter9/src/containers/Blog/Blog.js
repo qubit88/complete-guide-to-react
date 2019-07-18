@@ -5,6 +5,10 @@ import FullPost from "../../components/FullPost/FullPost";
 import NewPost from "../../components/NewPost/NewPost";
 import "./Blog.css";
 
+axios.defaults.baseURL = "https://jsonplaceholder.typicode.com/";
+axios.defaults.headers.common["Authorization"] = "AUTH TOKEN";
+axios.defaults.headers.post["Content-Type"] = "application/json";
+
 class Blog extends Component {
   state = {
     posts: [],
@@ -13,7 +17,7 @@ class Blog extends Component {
   };
   componentDidMount() {
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get("/posts/")
       .then(res => {
         const posts = res.data.slice(0, 4);
         const updatedPosts = posts.map(post => ({ ...post, author: "Max" }));
