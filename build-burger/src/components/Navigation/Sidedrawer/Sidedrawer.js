@@ -5,9 +5,9 @@ import Backdrop from "../../UI/Backdrop/Backdrop";
 import classes from "./Sidedrawer.module.css";
 
 const Sidedrawer = props => {
-  let attachedClasses = [classes.SideDrawer, classes.Close];
+  let attachedClasses = [classes.Sidedrawer, classes.Closed];
   if (props.open) {
-    attachedClasses = [classes.SideDrawer, classes.Open];
+    attachedClasses = [classes.Sidedrawer, classes.Open];
   }
   return (
     <>
