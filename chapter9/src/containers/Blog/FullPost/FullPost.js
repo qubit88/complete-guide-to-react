@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "./FullPost.css";
 
@@ -11,7 +12,7 @@ class FullPost extends Component {
     if (id) {
       if (
         !this.state.loadedPost ||
-        (this.state.loadedPost && this.state.loadedPost.id !== this.props.id)
+        (this.state.loadedPost && this.state.loadedPost.id !== id)
       ) {
         axios.get("/posts/" + id).then(res => {
           this.setState({ loadedPost: res.data });
@@ -25,7 +26,7 @@ class FullPost extends Component {
   };
   render() {
     let post = <p style={{ textAlign: "center" }}>Please select a Post!</p>;
-    if (this.props.id) {
+    if (this.props.match.params.id) {
       <p>Loading...</p>;
     }
     if (this.state.loadedPost) {
