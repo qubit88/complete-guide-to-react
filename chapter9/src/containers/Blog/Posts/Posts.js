@@ -43,11 +43,7 @@ class Posts extends Component {
     return (
       <div>
         <section className="Posts">{posts}</section>
-        <Route
-          to={`${this.props.match.url}/:id`}
-          exact
-          render={props => <FullPost {...props} />}
-        />
+        <Route to={this.props.match.url + "/:id"} exact component={FullPost} />
       </div>
     );
   }
