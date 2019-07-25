@@ -2,15 +2,20 @@ import React, { Component } from "react";
 import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 import axios from "../../axios";
 import Posts from "./Posts/Posts";
-import NewPost from "./NewPost/NewPost";
+import asyncComponent from "../../hoc/asyncComponent";
+// import NewPost from "./NewPost/NewPost";
 import "./Blog.css";
+
+const AsyncNewPost = asyncComponent(() => {
+  return import("./NewPost/NewPost");
+});
 
 axios.defaults.baseURL = "https://jsonplaceholder.typicode.com/";
 axios.defaults.headers.common["Authorization"] = "AUTH TOKEN";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 class Blog extends Component {
-  state = { auth: false };
+  state = { auth: true };
   render() {
     return (
       <div className="Blog">
@@ -49,10 +54,11 @@ class Blog extends Component {
         </section> */}
         <Switch>
           {this.state.auth.true ? (
-            <Route path="/new-post" component={NewPost} />
+            <Route path="/new-post" component={AsyncNewPost} />
           ) : null}
           <Route path="/posts/" component={Posts} />
-          <Redirect from="/" to="/posts" />
+          {/* <Redirect from="/" to="/posts" /> */}
+          <Route render={() => <h1>Not Found</h1>} />
         </Switch>
       </div>
     );
