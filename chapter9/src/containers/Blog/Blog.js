@@ -10,6 +10,7 @@ axios.defaults.headers.common["Authorization"] = "AUTH TOKEN";
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 class Blog extends Component {
+  state = { auth: false };
   render() {
     return (
       <div className="Blog">
@@ -47,7 +48,9 @@ class Blog extends Component {
           <NewPost />
         </section> */}
         <Switch>
-          <Route path="/new-post" component={NewPost} />
+          {this.state.auth.true ? (
+            <Route path="/new-post" component={NewPost} />
+          ) : null}
           <Route path="/posts/" component={Posts} />
           <Redirect from="/" to="/posts" />
         </Switch>

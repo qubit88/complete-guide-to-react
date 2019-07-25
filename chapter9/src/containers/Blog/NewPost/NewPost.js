@@ -12,6 +12,7 @@ class NewPost extends Component {
   };
 
   componentDidMount() {
+    // this.propd.history.replace('/');
     console.log(this.props);
   }
 
