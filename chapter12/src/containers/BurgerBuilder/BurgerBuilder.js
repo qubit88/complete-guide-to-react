@@ -56,7 +56,7 @@ class BurgerBuilder extends Component {
       ingredients: this.state.ingredients,
       price: this.state.totalPrice,
       customer: {
-        name: "qubit",
+        name: `qubit${Math.random() * 100}`,
         address: {
           street: "test street 2",
           country: "Narnia"
