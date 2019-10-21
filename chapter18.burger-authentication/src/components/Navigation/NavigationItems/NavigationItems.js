@@ -3,14 +3,18 @@ import NavigationItem from "./NavigationItem/NavigationItem";
 
 import classes from "./NavigationItems.module.css";
 
-const NavigationItems = () => (
+const NavigationItems = ({ isAuth }) => (
   <ul className={classes.NavigationItems}>
     <NavigationItem exact link="/">
       Burger Builder
     </NavigationItem>
     <NavigationItem link="/checkout">Checkout</NavigationItem>
-    <NavigationItem link="/orders">Orders</NavigationItem>
-    <NavigationItem link="/auth">Authentication</NavigationItem>
+    {isAuth ? <NavigationItem link="/orders">Orders</NavigationItem> : null}
+    {!isAuth ? (
+      <NavigationItem link="/auth">Authentication</NavigationItem>
+    ) : (
+      <NavigationItem link="/logout">Logout</NavigationItem>
+    )}
   </ul>
 );
 
