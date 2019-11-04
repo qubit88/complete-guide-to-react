@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useRef } from "react";
 import axios from "axios";
 
 function Todo(props) {
-  const [todoName, setTodoName] = useState("");
+  // const [todoName, setTodoName] = useState("");
   // const [todoList, setTodoList] = useState([]);
-  const [submittedTodo, setSubmittedTodo] = useState(null);
+  // const [submittedTodo, setSubmittedTodo] = useState(null);
   //   const [todoState, setTodoState] = useState({ userInput: '', todoList: [] });
+  const todoInputRef = useRef();
 
   const todoListReducer = (state, action) => {
     switch (action.type) {
@@ -50,23 +51,25 @@ function Todo(props) {
   //   };
   // }, []);
 
-  useEffect(() => {
-    submittedTodo && dispatch({ type: "ADD", payload: submittedTodo });
-  }, [submittedTodo]);
+  // useEffect(() => {
+  //   submittedTodo && dispatch({ type: "ADD", payload: submittedTodo });
+  // }, [submittedTodo]);
 
-  const inputChangeHandler = event => {
-    // setTodoState({
-    //   userInput: event.target.value,
-    //   todoList: todoState.todoList
-    // });
-    setTodoName(event.target.value);
-  };
+  // const inputChangeHandler = event => {
+  //   // setTodoState({
+  //   //   userInput: event.target.value,
+  //   //   todoList: todoState.todoList
+  //   // });
+  //   setTodoName(event.target.value);
+  // };
 
   const todoAddHandler = () => {
     // setTodoState({
     //   userInput: todoState.userInput,
     //   todoList: todoState.todoList.concat(todoState.userInput)
     // });
+
+    const todoName = todoInputRef.current.value;
 
     axios
       .post("https://react-hooks-e6a22.firebaseio.com/todos.json", {
@@ -76,7 +79,7 @@ function Todo(props) {
         console.log(res);
         setTimeout(() => {
           const todoItem = { id: res.data.name, name: todoName };
-          setSubmittedTodo(todoItem);
+          dispatch({ type: "ADD", payload: todoItem });
         }, 3000);
       })
       .catch(err => {
@@ -93,12 +96,7 @@ function Todo(props) {
 
   return (
     <React.Fragment>
-      <input
-        type="text"
-        placeholder="Todo"
-        onChange={inputChangeHandler}
-        value={todoName}
-      />
+      <input type="text" placeholder="Todo" ref={todoInputRef} />
       <button type="button" onClick={todoAddHandler}>
         Add
       </button>
