@@ -1,4 +1,4 @@
-export { useState } from "react";
+import { useState } from "react";
 
 export const useFormInput = () => {
   const [value, setValue] = useState("");
@@ -12,5 +12,5 @@ export const useFormInput = () => {
       setValidity(true);
     }
   };
-  return { value, onChange: inputChangeHandler };
+  return { value, validity, onChange: inputChangeHandler };
 };

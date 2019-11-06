@@ -82,7 +82,7 @@ function Todo(props) {
     //   todoList: todoState.todoList.concat(todoState.userInput)
     // });
 
-    const todoName = todoInputRef.current.value;
+    const todoName = todoInput.value;
 
     axios
       .post("https://react-hooks-e6a22.firebaseio.com/todos.json", {
@@ -112,9 +112,9 @@ function Todo(props) {
       <input
         type="text"
         placeholder="Todo"
-        ref={todoInputRef}
-        onChange={inputValidation}
-        style={{ backgroundColor: inputIsValid ? "transparent" : "red" }}
+        onChange={todoInput.onChange}
+        value={todoInput.value}
+        style={{ backgroundColor: todoInput.validity ? "transparent" : "red" }}
       />
       <button type="button" onClick={todoAddHandler}>
         Add
